@@ -1,11 +1,11 @@
 from django.contrib import admin
-from . import models
-
-# Register your models here.
-# admin.site.register(models.Login)
 
 # Define the admin class
 from .models import *
+
+
+# Register your models here.
+# admin.site.register(models.Login)
 
 
 class ProfileAdmin(admin.ModelAdmin):
@@ -13,7 +13,7 @@ class ProfileAdmin(admin.ModelAdmin):
 
 
 # Register the admin class with the associated model
-admin.site.register(Profile, ProfileAdmin)
+admin.site.register(UserProfile, ProfileAdmin)
 
 
 class GroupAdmin(admin.ModelAdmin):

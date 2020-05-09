@@ -1,0 +1,18 @@
+{% extends 'userprofile/base_profile.html'%}
+
+{% block title %}
+Profiles
+{% endblock %}
+
+{% block content %}
+<h1 class="mb-5">Profiles:</h1>
+
+<p>
+    {{ profile.surname }}
+            {{ profile.name }}
+            {{ profile.patronymic }}
+
+        </p>
+
+
+    {% endblock %}

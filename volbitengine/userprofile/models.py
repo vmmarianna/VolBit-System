@@ -2,7 +2,7 @@ from django.db import models
 from django.shortcuts import reverse
 
 
-class Profile(models.Model):
+class UserProfile(models.Model):
     """Класс-модель для профилей студентов"""
     id_profile = models.AutoField(primary_key=True)
     surname = models.CharField(max_length=100)

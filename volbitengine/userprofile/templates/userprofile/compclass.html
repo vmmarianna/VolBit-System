@@ -1,0 +1,16 @@
+{% extends 'userprofile/base_profile.html'%}
+
+{% block title %}
+Groups list - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<h1 class="mt-5">CompClass:</h1>
+
+{% for each in compclass %}
+{% for cmcl in each.name_comp.all %}
+<h2> {{ cmcl }} - {{ each.price|floatformat:2 }}</h2>
+    {% endfor %}
+{% endfor %}
+
+{% endblock %}
