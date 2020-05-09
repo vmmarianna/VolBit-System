@@ -1,0 +1,20 @@
+{% extends 'profile/base_profile.html'%}
+
+    {% block title %}
+      Profiles
+    {% endblock %}
+
+  {% block content %}
+    <h1 class="mb-5">CompClass:</h1>
+
+        <p>
+            {{  compclass.id_comp }}
+            {{ compclass.name_comp }}
+            {{ compclass.price }}
+            {{ compclass.beg_hours }}
+            {{ compclass.end_hours }}
+
+        </p>
+
+
+    {% endblock %}
