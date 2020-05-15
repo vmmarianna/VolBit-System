@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.shortcuts import reverse
 
@@ -5,12 +6,13 @@ from django.shortcuts import reverse
 class UserProfile(models.Model):
     """Класс-модель для профилей студентов"""
     id_profile = models.AutoField(primary_key=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     surname = models.CharField(max_length=100)
     name = models.CharField(max_length=100)
     patronymic = models.CharField(max_length=50)
     date_of_birth = models.DateField(null=True)
     ph_number = models.CharField(max_length=12)
-    email = models.EmailField()
+    # email = models.EmailField()
     group = models.ManyToManyField('Group', blank=True, related_name='profiles')
 
     def get_absolute_url(self):

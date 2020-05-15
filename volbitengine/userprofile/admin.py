@@ -9,7 +9,7 @@ from .models import *
 
 
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('id_profile', 'surname', 'name', 'patronymic', 'date_of_birth', 'ph_number', 'email')
+    list_display = ('id_profile', 'surname', 'name', 'patronymic', 'date_of_birth', 'ph_number', 'user',)
 
 
 # Register the admin class with the associated model
