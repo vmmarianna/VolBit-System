@@ -21,23 +21,26 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'profile_list_url' %}">Profile </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'groups_list_url' %}">Group</a>
-      </li>
-        <li class="nav-item">
-        <a class="nav-link" href="{% url 'compclass_list_url' %}">Schedule</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="{% url 'profile_list_url' %}">Профили</a>
+        </li>
+
+        <li class="nav-item active">
+            <a class="nav-link" href="{% url 'groups_list_url' %}">Список групп</a>
+        </li>
+
+        <li class="nav-item active">
+            <a class="nav-link" href="{% url 'compclass_list_url' %}">Расписние</a>
+        </li>
+
+        <li class="nav-item active">
+            <a class="nav-link" href="{% url 'places_list_url' %}">Места проведения занятия</a>
+        </li>
+
+        <li class="nav-item active">
+            <a class="nav-link" href="{% url 'teachers_list_url' %}">Преподаватели</a>
+        </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
   </div>
 </nav>
 

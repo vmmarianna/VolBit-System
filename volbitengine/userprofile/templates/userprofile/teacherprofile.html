@@ -1,0 +1,12 @@
+{% extends 'userprofile/base_profile.html'%}
+
+{% block title %}
+Profiles
+{% endblock %}
+
+{% block content %}
+<h1 class="mb-3">Преподаватели:</h1>
+{% for teacher in teachers %}
+{% include 'userprofile/includes/teacher_card_template.html' %}
+{% endfor %}
+{% endblock %}

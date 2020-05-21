@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+         Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="0.9.1-beta" last-position="0,0" last-zoom="0.9"
+	 default-schema="public" default-owner="postgres">
+<database name="new_database">
+</database>
+
+<schema name="public" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<table name="STUDENTS">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="140" y="80"/>
+	<column name="id_student" not-null="true">
+		<type name="numeric" length="4"/>
+	</column>
+	<column name="surname" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="varchar" length="25"/>
+	</column>
+	<column name="patronymic" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="address" not-null="true">
+		<type name="varchar" length="200"/>
+	</column>
+	<column name="name_school" not-null="true">
+		<type name="numeric" length="15"/>
+	</column>
+	<column name="sex" not-null="true">
+		<type name="varchar" length="10"/>
+	</column>
+	<column name="data_born" not-null="true">
+		<type name="date" length="15"/>
+	</column>
+	<column name="email" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="password" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="parent_name" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="parent_surname" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="parent_patronymic" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<constraint name="STUDENTS_pk" type="pk-constr" table="public.&quot;STUDENTS&quot;">
+		<columns names="id_student" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="LESSONS">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="320" y="580"/>
+	<column name="id_lesson" not-null="true">
+		<type name="numeric" length="4"/>
+	</column>
+	<column name="pay" not-null="true">
+		<type name="numeric" length="5"/>
+	</column>
+	<column name="date_start" not-null="true">
+		<type name="date" length="0"/>
+	</column>
+	<column name="date_end">
+		<type name="smallint" length="0"/>
+	</column>
+	<constraint name="LESSONS_pk" type="pk-constr" table="public.&quot;LESSONS&quot;">
+		<columns names="id_lesson" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="id_comp_class_COMP_CLASS" index="4"/>
+		<object name="id_place_PLACES" index="2"/>
+		<object name="id_teacher_TEACHER" index="3"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="COMP_CLASS_fk" index="4"/>
+		<object name="LESSONS_uq" index="2"/>
+		<object name="LESSONS_uq1" index="5"/>
+		<object name="PLACES_fk" index="1"/>
+		<object name="TEACHER_fk" index="3"/>
+	</customidxs>
+</table>
+
+<table name="TEACHER">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="700" y="660"/>
+	<column name="id_teacher" not-null="true">
+		<type name="numeric" length="4"/>
+	</column>
+	<column name="surname" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="varchar" length="25"/>
+	</column>
+	<column name="patronymic" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="ph_number" not-null="true">
+		<type name="numeric" length="12"/>
+	</column>
+	<column name="sex" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="data_born" not-null="true">
+		<type name="date" length="0"/>
+	</column>
+	<constraint name="TEACHER_pk" type="pk-constr" table="public.&quot;TEACHER&quot;">
+		<columns names="id_teacher" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="PLACES">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="60" y="600"/>
+	<column name="id_place" not-null="true">
+		<type name="numeric" length="4"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="address" not-null="true">
+		<type name="varchar" length="200"/>
+	</column>
+	<column name="floor" not-null="true">
+		<type name="numeric" length="5"/>
+	</column>
+	<column name="office" not-null="true">
+		<type name="numeric" length="5"/>
+	</column>
+	<constraint name="PLACES_pk" type="pk-constr" table="public.&quot;PLACES&quot;">
+		<columns names="id_place" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="COMP_CLASS">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="980" y="460"/>
+	<column name="id_comp_class" not-null="true">
+		<type name="numeric" length="4"/>
+	</column>
+	<column name="time" not-null="true">
+		<type name="varchar" length="5"/>
+	</column>
+	<column name="price" not-null="true">
+		<type name="varchar" length="0"/>
+	</column>
+	<column name="hours_b" not-null="true">
+		<type name="numeric" length="2"/>
+	</column>
+	<column name="minute_b" not-null="true">
+		<type name="numeric" length="2"/>
+	</column>
+	<column name="hours_e" not-null="true">
+		<type name="numeric" length="2"/>
+	</column>
+	<column name="minute_e" not-null="true">
+		<type name="numeric" length="2"/>
+	</column>
+	<column name="max_col" not-null="true">
+		<type name="numeric" length="2"/>
+	</column>
+	<column name="min_col" not-null="true">
+		<type name="numeric" length="2"/>
+	</column>
+	<column name="number_weekday" not-null="true">
+		<type name="numeric" length="2"/>
+	</column>
+	<constraint name="COMP_CLASSd_pk" type="pk-constr" table="public.&quot;COMP_CLASS&quot;">
+		<columns names="id_comp_class" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="id_group_GROUP" index="10"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="COMP_CLASS_uq" index="2"/>
+		<object name="GROUP_fk" index="1"/>
+	</customidxs>
+</table>
+
+<table name="RASPISANIE">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="780" y="140"/>
+	<column name="id_schedule" not-null="true">
+		<type name="numeric" length="4"/>
+	</column>
+	<constraint name="SCHEDULE_pk" type="pk-constr" table="public.&quot;RASPISANIE&quot;">
+		<columns names="id_schedule" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="id_comp_class_COMP_CLASS" index="3"/>
+		<object name="id_student_STUDENTS" index="1"/>
+		<object name="id_teacher_TEACHER" index="2"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="COMP_CLASS_fk" index="5"/>
+		<object name="RASPISANIE_uq" index="2"/>
+		<object name="RASPISANIE_uq1" index="4"/>
+		<object name="RASPISANIE_uq2" index="6"/>
+		<object name="STUDENTS_fk" index="1"/>
+		<object name="TEACHER_fk" index="3"/>
+	</customidxs>
+</table>
+
+<relationship name="SCHEDULE_has_one_STUDENTS" type="rel11"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#d2f905"
+	 src-table="public.&quot;STUDENTS&quot;"
+	 dst-table="public.&quot;RASPISANIE&quot;"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="SCHEDULE_has_one_TEACHER" type="rel11"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#afed99"
+	 src-table="public.&quot;TEACHER&quot;"
+	 dst-table="public.&quot;RASPISANIE&quot;"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="SCHEDULE_has_one_COMP_CLASS" type="rel11"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#ae054b"
+	 src-table="public.&quot;COMP_CLASS&quot;"
+	 dst-table="public.&quot;RASPISANIE&quot;"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="LESSONS_has_one_PLACES" type="rel11"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#b330c5"
+	 src-table="public.&quot;PLACES&quot;"
+	 dst-table="public.&quot;LESSONS&quot;"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="TEACHER_LESSONS" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#992801"
+	 src-table="public.&quot;TEACHER&quot;"
+	 dst-table="public.&quot;LESSONS&quot;"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="LESSONS_COMP_CLASS" type="rel11"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#0c19b8"
+	 src-table="public.&quot;COMP_CLASS&quot;"
+	 dst-table="public.&quot;LESSONS&quot;"
+	 src-required="false" dst-required="false"/>
+
+<table name="GROUP">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="420" y="360"/>
+	<column name="id_group" not-null="true">
+		<type name="numeric" length="4"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<constraint name="GROUP_pk" type="pk-constr" table="public.&quot;GROUP&quot;">
+		<columns names="id_group" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="STUDENTS_GROUP" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#b1deaf"
+	 src-table="public.&quot;STUDENTS&quot;"
+	 dst-table="public.&quot;GROUP&quot;"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="COMP_GROUP" type="rel11"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#911739"
+	 src-table="public.&quot;GROUP&quot;"
+	 dst-table="public.&quot;COMP_CLASS&quot;"
+	 src-required="false" dst-required="false"/>
+
+<table name="COURSE">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="100" y="380"/>
+	<column name="id_course" not-null="true">
+		<type name="numeric" length="4"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="varchar" length="200"/>
+	</column>
+	<constraint name="COURSE_pk" type="pk-constr" table="public.&quot;COURSE&quot;">
+		<columns names="id_course" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="GROUP_COURSE" type="rel11"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#cad1e6"
+	 src-table="public.&quot;COURSE&quot;"
+	 dst-table="public.&quot;GROUP&quot;"
+	 src-required="false" dst-required="false"/>
+
+</dbmodel>

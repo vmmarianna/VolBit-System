@@ -1,0 +1,29 @@
+{% extends 'userprofile/base_profile.html'%}
+
+{% block title %}
+Profiles
+{% endblock %}
+
+{% block content %}
+<h1 class="mb-5">Places:</h1>
+
+
+<table>
+    <tr>
+        <th>Место</th>
+        <th>Адрес</th>
+        <th>Этаж</th>
+        <th>Кабинет</th>
+    </tr>
+    {% for each in places %}
+    <tr>
+        <td> {{ each.name_place }}</td>
+        <td>{{ each.address }}</td>
+        <td>{{ each.floor }}</td>
+        <td>{{ each.office }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+{% endblock %}

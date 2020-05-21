@@ -1,0 +1,14 @@
+{% extends 'userprofile/base_profile.html'%}
+
+{% block title %}
+{{ group.name_group }} - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<h1 class="mt-5">Students with "{{ group.name_group }}"</h1>
+
+{% for profile in group.profiles.all %}
+{% include 'userprofile/includes/profile_card_template.html' %}
+{% endfor %}
+
+{% endblock %}
