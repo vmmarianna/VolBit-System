@@ -1,1 +1,2 @@
-web: python volbitengine/manage.py runserver
+web: cd volbitengine; gunicorn volbitengine.wsgi --log-file -
+
