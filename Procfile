@@ -1,2 +1,2 @@
-web: cd volbitengine; python manage.py collectstatic --noinput; gunicorn volbitengine.wsgi --log-file -
+web: cd volbitengine; python3 manage.py collectstatic; gunicorn volbitengine.wsgi --log-file -
 
