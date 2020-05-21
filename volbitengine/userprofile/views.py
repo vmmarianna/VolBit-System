@@ -33,9 +33,19 @@ def compclass_list(request):
     return render(request, template_name='userprofile/compclass.html', context={'compclass': compclass})
 
 
-def compclass_detail(request, id_comp):
-    compclas = get_object_or_404(CompClass, id_comp=id_comp)
-    return render(request, 'userprofile/compcl_detail.html', {'compclas': compclas})
+def places_list(request):
+    places = Places.objects.all()
+    return render(request, template_name='userprofile/places.html', context={'places': places})
+
+
+def teach_list(request):
+    teachers = TeacherProfile.objects.all()
+    return render(request, template_name='userprofile/teacherprofile.html', context={'teachers': teachers})
+
+
+def teach_detail(request, id_teacher):
+    teacher = get_object_or_404(TeacherProfile, id_teacher=id_teacher)
+    return render(request, 'userprofile/teacher_detail.html', {'teacher': teacher})
 
 
 def registration(request):

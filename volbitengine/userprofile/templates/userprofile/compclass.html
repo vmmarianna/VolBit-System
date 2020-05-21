@@ -7,10 +7,24 @@ Groups list - {{ block.super }}
 {% block content %}
 <h1 class="mt-5">CompClass:</h1>
 
-{% for each in compclass %}
-{% for cmcl in each.name_comp.all %}
-<h2> {{ cmcl }} - {{ each.price|floatformat:2 }}</h2>
+<table>
+    <tr>
+        <th>Группа</th>
+        <th>Стоимость 1 занятия</th>
+        <th>Время начала занятия</th>
+        <th>Время окончания занятия</th>
+    </tr>
+    {% for each in compclass %}
+    {% for cmcl in each.name_comp.all %}
+    <tr>
+        <td><a href="{{ cmcl.get_absolute_url }}">{{ cmcl }}</a></td>
+        <td>{{ each.price|floatformat:2 }}</td>
+        <td>{{ each.beg_hours }}</td>
+        <td>{{ each.end_hours }}</td>
+    </tr>
     {% endfor %}
-{% endfor %}
+    {% endfor %}
+</table>
+
 
 {% endblock %}

@@ -30,3 +30,19 @@ class CompClassAdmin(admin.ModelAdmin):
 
 # Register the admin class with the associated model
 admin.site.register(CompClass, CompClassAdmin)
+
+
+class PlacesAdmin(admin.ModelAdmin):
+    list_display = ('id_place', 'name_place', 'address', 'floor', 'office')
+    # Register the admin class with the associated model
+
+
+admin.site.register(Places, PlacesAdmin)
+
+
+class TeacherProfileAdmin(admin.ModelAdmin):
+    list_display = ('id_teacher', 'surname', 'name', 'patronymic', 'date_of_birth', 'ph_number')
+    # Register the admin class with the associated model
+
+
+admin.site.register(TeacherProfile, TeacherProfileAdmin)
