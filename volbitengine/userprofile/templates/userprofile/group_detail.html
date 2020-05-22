@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-<h1 class="mt-5">Students with "{{ group.name_group }}"</h1>
+<h1 class="mt-5">Студенты из группы: "{{ group.name_group }}"</h1>
 
 {% for profile in group.profiles.all %}
 {% include 'userprofile/includes/profile_card_template.html' %}
