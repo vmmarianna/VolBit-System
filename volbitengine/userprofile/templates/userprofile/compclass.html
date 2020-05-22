@@ -1,12 +1,12 @@
 {% extends 'userprofile/base_profile.html'%}
-
+{% load static %}
 {% block title %}
 Groups list - {{ block.super }}
 {% endblock %}
 
 {% block content %}
+<link rel="stylesheet" href="{% static 'userprofile/css/style.css' %}" type="text/css">
 <h1 class="mt-5">Курсы:</h1>
-
 <table>
     <tr>
         <th>Группа</th>
