@@ -5,14 +5,28 @@ Profiles
 {% endblock %}
 
 {% block content %}
-<h1 class="mb-5">Profiles:</h1>
 
-<p>
-    {{ profile.surname }}
-            {{ profile.name }}
-            {{ profile.patronymic }}
+<table>
 
-        </p>
+    <tr>
+        <th>Фамилия</th>
+        <th>Имя</th>
+        <th>Отчество</th>
+        <th>Номер школы</th>
+        <th>Дата рожления</th>
+        <th>Номер телефона</th>
+
+    </tr>
+    <tr>
+        <td> {{ profile.surname }}</td>
+        <td>{{ profile.name }}</td>
+        <td>{{ profile.patronymic }}</td>
+        <td>{{ profile.number_school }}</td>
+        <td>{{ profile.date_of_birth }}</td>
+        <td>{{ profile.ph_number }}</td>
+    </tr>
+
+</table>
 
 
-    {% endblock %}
+{% endblock %}

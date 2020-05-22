@@ -25,7 +25,7 @@ admin.site.register(Group, GroupAdmin)
 
 
 class CompClassAdmin(admin.ModelAdmin):
-    list_display = ('id_comp', 'price', 'beg_hours', 'end_hours')
+    list_display = ('id_comp', 'price', 'long', 'weekday', 'beg_hours', 'end_hours')
 
 
 # Register the admin class with the associated model
@@ -46,3 +46,11 @@ class TeacherProfileAdmin(admin.ModelAdmin):
 
 
 admin.site.register(TeacherProfile, TeacherProfileAdmin)
+
+
+class LessonsAdmin(admin.ModelAdmin):
+    list_display = ('id_lesson', 'pay', 'date_start ', 'date_end')
+    # Register the admin class with the associated model
+
+
+admin.site.register(Lessons)

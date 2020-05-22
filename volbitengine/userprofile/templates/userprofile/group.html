@@ -5,13 +5,14 @@ Groups list - {{ block.super }}
 {% endblock %}
 
 {% block content %}
-<h1 class="mt-5">Groups:</h1>
+<h1 class="mt-5">Группы:</h1>
 {% for group in groups %}
 
-<h2><a href="{{ group.get_absolute_url }}"> {{group.name_group}}</h2>
+<h2><a href="{{ group.get_absolute_url }}"> {{group.name_group}}</a></h2>
 
 
 
     {% endfor %}
 
 {% endblock %}
+
