@@ -24,7 +24,7 @@ SECRET_KEY = 'c50sg-j(^j8#m+9t$*awthn$i=v4^h0ld#5dp4e!q6l)ct_t3v'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['volbit.herokuapp.com', 'localhost']
 
 # Application definition
 
