@@ -5,12 +5,13 @@ Groups list - {{ block.super }}
 {% endblock %}
 
 {% block content %}
-<h1 class="mt-5">CompClass:</h1>
+<h1 class="mt-5">Курсы:</h1>
 
 <table>
     <tr>
         <th>Группа</th>
         <th>Стоимость 1 занятия</th>
+        <th>Продолжительность</th>
         <th>Время начала занятия</th>
         <th>Время окончания занятия</th>
     </tr>
@@ -19,6 +20,7 @@ Groups list - {{ block.super }}
     <tr>
         <td><a href="{{ cmcl.get_absolute_url }}">{{ cmcl }}</a></td>
         <td>{{ each.price|floatformat:2 }}</td>
+        <td>{{ each.long }}</td>
         <td>{{ each.beg_hours }}</td>
         <td>{{ each.end_hours }}</td>
     </tr>

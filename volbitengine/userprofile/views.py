@@ -48,6 +48,11 @@ def teach_detail(request, id_teacher):
     return render(request, 'userprofile/teacher_detail.html', {'teacher': teacher})
 
 
+def lessons_list(request):
+    lessons = Lessons.objects.all()
+    return render(request, template_name='userprofile/lessons.html', context={'lessons': lessons})
+
+
 def registration(request):
     if request.method == 'GET':
         user_form = UserForm()

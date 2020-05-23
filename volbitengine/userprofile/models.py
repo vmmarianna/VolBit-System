@@ -10,7 +10,7 @@ class UserProfile(models.Model):
     surname = models.CharField(max_length=100)
     name = models.CharField(max_length=100)
     patronymic = models.CharField(max_length=50)
-    number_school = models.IntegerField(max_length=5)
+    number_school = models.IntegerField()
     date_of_birth = models.DateField(null=True)
     ph_number = models.CharField(max_length=12)
     # email = models.EmailField()
@@ -34,35 +34,6 @@ class Group(models.Model):
         return '%s' % self.name_group
 
 
-class CompClass(models.Model):
-    id_comp = models.AutoField(primary_key=True)
-    name_comp = models.ManyToManyField('Group', blank=True, related_name='compclass')
-    # Цена не должна быть целой
-    price = models.FloatField()
-    beg_hours = models.TimeField()
-    end_hours = models.TimeField()
-
-    def get_absolute_url(self):
-        return reverse('compclass_detail_url', args=[str(self.id_comp)])
-
-    def __str__(self):
-        return '%s' % self.name_comp
-
-
-class Places(models.Model):
-    id_place = models.AutoField(primary_key=True)
-    name_place = models.CharField(max_length=100)
-    address = models.CharField(max_length=100)
-    floor = models.IntegerField(max_length=2)
-    office = models.CharField(max_length=5)
-
-    def get_absolute_url(self):
-        return reverse('places_detail_url', args=[str(self.id_place)])
-
-    def __str__(self):
-        return '%s' % self.name_place
-
-
 class TeacherProfile(models.Model):
     """Класс-модель для профилей преподавателей"""
     id_teacher = models.AutoField(primary_key=True)
@@ -77,3 +48,54 @@ class TeacherProfile(models.Model):
 
     def __str__(self):
         return '%s, %s, %s' % (self.surname, self.name, self.patronymic)
+
+
+class CompClass(models.Model):
+    id_comp = models.AutoField(primary_key=True)
+    name_comp = models.ManyToManyField('Group', blank=True, related_name='compclass')
+    # Цена не должна быть целой
+    weekday = models.CharField(max_length=15)
+    price = models.FloatField()
+    long = models.FloatField(max_length=5)
+    beg_hours = models.TimeField()
+    end_hours = models.TimeField()
+    name_teacher = models.OneToOneField('TeacherProfile', blank=True, related_name='teacher',
+                                        on_delete=models.CASCADE, )
+
+    def get_absolute_url(self):
+        return reverse('compclass_detail_url', args=[str(self.id_comp)])
+
+    def __str__(self):
+        return '%s' % self.name_comp
+
+
+class Places(models.Model):
+    id_place = models.AutoField(primary_key=True)
+    name_place = models.CharField(max_length=100)
+    address = models.CharField(max_length=100)
+    floor = models.IntegerField()
+    office = models.CharField(max_length=5)
+
+    def get_absolute_url(self):
+        return reverse('places_detail_url', args=[str(self.id_place)])
+
+    def __str__(self):
+        return '%s' % self.name_place
+
+
+class Lessons(models.Model):
+    id_lesson = models.AutoField(primary_key=True)
+    pay = models.BooleanField(null=True)
+    date_start = models.DateField(auto_now=False, auto_now_add=False, )
+    date_end = models.DateField(null=True, auto_now=False, auto_now_add=False, )
+    name_place = models.OneToOneField('Places', blank=True, related_name='places', on_delete=models.CASCADE, )
+    name_teacher = models.ManyToManyField('TeacherProfile', blank=True, related_name='teacherprofile')
+    name_group = models.OneToOneField('Group', blank=True, related_name='group', on_delete=models.CASCADE, )
+    students = models.ManyToManyField('UserProfile', blank=True, related_name='students', )
+    # ФИО студента
+
+    def get_absolute_url(self):
+        return reverse('lessons_detail_url', args=[str(self.id_lesson)])
+
+    def __str__(self):
+        return '%s - %s - %s' % (self.name_group, self.name_place, self.date_start)
