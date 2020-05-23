@@ -1,2 +1,1 @@
-web: cd volbitengine; mkdir static; gunicorn volbitengine.wsgi --log-file -
-
+web: gunicorn volbitengine.wsgi --log-file -
