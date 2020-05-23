@@ -87,15 +87,15 @@ class Lessons(models.Model):
     id_lesson = models.AutoField(primary_key=True)
     pay = models.BooleanField(null=True)
     date_start = models.DateField(auto_now=False, auto_now_add=False, )
-    date_end = models.DateField(blank=True, auto_now=False, auto_now_add=False, )
+    date_end = models.DateField(null=True, auto_now=False, auto_now_add=False, )
     name_place = models.OneToOneField('Places', blank=True, related_name='places', on_delete=models.CASCADE, )
     name_teacher = models.ManyToManyField('TeacherProfile', blank=True, related_name='teacherprofile')
     name_group = models.OneToOneField('Group', blank=True, related_name='group', on_delete=models.CASCADE, )
-
+    students = models.ManyToManyField('UserProfile', blank=True, related_name='students', )
     # ФИО студента
 
     def get_absolute_url(self):
         return reverse('lessons_detail_url', args=[str(self.id_lesson)])
 
     def __str__(self):
-        return '%s - %s' % (self.name_group, self.name_place)
+        return '%s - %s - %s' % (self.name_group, self.name_place, self.date_start)
