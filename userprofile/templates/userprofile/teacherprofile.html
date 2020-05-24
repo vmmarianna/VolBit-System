@@ -5,8 +5,14 @@ Profiles
 {% endblock %}
 
 {% block content %}
-<h1 class="mb-3">Преподаватели:</h1>
-{% for teacher in teachers %}
-{% include 'userprofile/includes/teacher_card_template.html' %}
-{% endfor %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-6 offset-md-2">
+            <h1 class="mb-3">Преподаватели:</h1>
+            {% for teacher in teachers %}
+            {% include 'userprofile/includes/teacher_card_template.html' %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
 {% endblock %}

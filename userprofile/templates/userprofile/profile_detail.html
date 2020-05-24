@@ -5,28 +5,46 @@ Profiles
 {% endblock %}
 
 {% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-6 offset-md-2">
+            <table class="table table-bordered" >
 
-<table>
+                <tbody>
+                <tr scope="row" >
+                    <td>Фамилия</td>
+                    <td>{{ profile.surname }}</td>
+                </tr>
 
-    <tr>
-        <th>Фамилия</th>
-        <th>Имя</th>
-        <th>Отчество</th>
-        <th>Номер школы</th>
-        <th>Дата рожления</th>
-        <th>Номер телефона</th>
+                <tr scope="row">
+                    <td>Имя</td>
+                    <td>{{ profile.name }}</td>
+                </tr>
 
-    </tr>
-    <tr>
-        <td>{{ profile.surname }}</td>
-        <td>{{ profile.name }}</td>
-        <td>{{ profile.patronymic }}</td>
-        <td>{{ profile.number_school }}</td>
-        <td>{{ profile.date_of_birth }}</td>
-        <td>{{ profile.ph_number }}</td>
-    </tr>
+                <tr scope="row">
+                    <td>Отчество</td>
+                    <td>{{ profile.patronymic }}</td>
+                </tr>
 
-</table>
+                <tr scope="row">
+                    <td>Номер школы</td>
+                    <td>{{ profile.number_school }}</td>
+                </tr>
+
+                <tr scope="row">
+                    <td>Дата рожления</td>
+                    <td>{{ profile.date_of_birth|date:"d M Y" }}</td>
+                </tr>
+
+                <tr scope="row">
+                    <td>Номер телефона</td>
+                    <td>{{ profile.ph_number }}</td>
+                </tr>
 
 
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 {% endblock %}

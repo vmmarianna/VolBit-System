@@ -1,12 +1,197 @@
 {% extends 'userprofile/base_profile.html'%}
+{% load static %}
 
 {% block title %}
-Profiles
+Информация
 {% endblock %}
 
 {% block content %}
-<h1 class="mb-3">Профили:</h1>
-{% for profile in profiles %}
-{% include 'userprofile/includes/profile_card_template.html' %}
-{% endfor %}
+<body>
+<!-- header -->
+<div class="header" style="height: 827px;">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="description ">
+            <h1>
+                Компьютерный клуб "VolBit"
+                <p>
+                    Научим вашего ребенка с пользой использовать компьютер, планшет под руководством опытных
+                    преподавателей и волонтеров.
+                    #VolBIT #ИТмойвыбор
+                </p>
+            </h1>
+            <button class="btn btn-outline-secondary"><a
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSdEmVt2dyHLNn3AU-6uFrVoq4AWPDwYu9dqCaDuoKvUjoiUjw/viewform"
+                    class="card-link"> Запись на пробное занятие</a></button>
+            <button class="btn btn-outline-secondary">Расписание</button>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- about section -->
+<div class="about" id="about">
+    <div class="container">
+        <h1 class="text-center">О компьютерном клубе</h1>
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <img src="{% static 'userprofile/images/logo.png' %}" class="rounded-circle">
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-12 desc">
+
+                <p>
+                <h5>VolBIT работает в формате кружка, клуба, сообщества единомышленников - энтузиастов,
+                    увлеченных информационными технологиями. Мы любим творить, изобретать, придумывать.
+                    Наши двери открыты для всех любознательных, трудолюбивых и целеустремленных.
+                    Мы не только изучаем языки программирования и различные digital инструменты и среды.
+                    Мы совместно придумываем и создаем работающие и полезные проекты.
+                </h5>
+
+                </p>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- courses -->
+<div class="courses" id="courses">
+    <h1 class="text-center"> Курсы VolBIT </h1>
+    <h2 class="text-center">Курсы VolBIT последовательно ориентированы на школьников младших, средних и старших
+        классов. </h2>
+    <!--		<h3 class="text-center"> <a href="all_courses.html" class="card-link">Полный перечень курсов </a></h3>-->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <img src="{% static 'userprofile/images/courses/scratch.png' %}" class="img-fluid">
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <img src="{% static 'userprofile/images/courses/C++_Logo.dsvg.png' %}" class="img-fluid">
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <img src="{% static 'userprofile/images/courses/python.jpg' %}" class="img-fluid">
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Info section -->
+<div class="info" id="info">
+    <div class="container">
+        <h1 class="text-center"> Информация </h1>
+        <div class="row">
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="card">
+                    <div class="card-img">
+                        <img src="{% static 'userprofile/images/posts/polit.jpg' %}" class="img-fluid">
+                    </div>
+
+                    <div class="card-body">
+                        <h4 class="card-title">Полезные статьи об обучении детей цифровым технологиям</h4>
+                        <p class="card-text">
+
+                            Компьютерный клуб VolBIT накопил опыт обучения детей цифровым технологиям.
+                            Важно заложить с младшего школьного возраста прочный фундамент цифровых знаний,
+                            правильную основу для применения компьютеров в жизни.
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://vk.com/@volbit35-poleznye-stati-ob-obuchenii-detei-cifrovym-tehnologiyam"
+                           class="card-link">Читать продолжение</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="card">
+                    <div class="card-img">
+                        <img src="{% static 'userprofile/images/posts/images.jpg' %}" class="img-fluid">
+                    </div>
+
+                    <div class="card-body">
+                        <h4 class="card-title">Вологодские школьники отправляются на вынужденные каникулы</h4>
+                        <p class="card-text">
+
+                            Уважаемые родители и дорогие дети. VolBIT с 18 марта по 1 апреля на каникулах.
+                            По возможности занятия переносятся в дистанционный формат. Уточняйте в сообщениях группы.
+                            В случае изменений мы оперативно известим вас.
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="http://vologda.ru/news/education/41872/" class="card-link">Читать продолжение</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="card">
+                    <div class="card-img">
+                        <img src="{% static 'userprofile/images/posts/imag2.jpg' %}" class="img-fluid">
+                    </div>
+
+                    <div class="card-body">
+                        <h4 class="card-title">Почему в VolBIT Скретч? .</h4>
+                        <p class="card-text">
+
+                            Почему в VolBIT Скретч - базовый курс для детей младшего школьного возраста по обучению
+                            цифровым технологиям.
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://vk.com/@volbit35-rasskazyvaem-chto-takoe-skretch" class="card-link">Читать
+                            продолжение</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- group section -->
+<div class="group" id="group">
+    <div class="container">
+        <h1 class="text-center">Наши преподователи</h1>
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-12 item">
+                <img src="{% static 'userprofile/images/team-2.jpg' %}" class="img-fluid" alt="team">
+                <div class="des">
+                    Марина
+                </div>
+                <span class="text-muted">преподаватель Скретч</span>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-12 item">
+                <img src="{% static 'userprofile/images/team-3.jpg' %}" class="img-fluid" alt="team">
+                <div class="des">
+                    Chris
+                </div>
+                <span class="text-muted">преподаватель Скретч</span>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-12 item">
+                <img src="{% static 'userprofile/images/team-2.jpg' %}" class="img-fluid" alt="team">
+                <div class="des">
+                    Layla
+                </div>
+                <span class="text-muted">преподаватель Python</span>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-12 item">
+                <img src="{% static 'userprofile/images/team-3.jpg' %}" class="img-fluid" alt="team">
+                <div class="des">
+                    J.Jirard
+                </div>
+                <span class="text-muted">преподаватель С++ </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+ <!-- add Javasscript file from js file -->
+    <script type="text/javascript" src="{% static 'userprofile/js/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'userprofile/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'userprofile/js/main.js' %}"></script>
+
+</body>
+</html>
 {% endblock %}

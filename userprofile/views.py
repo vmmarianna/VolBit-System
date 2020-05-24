@@ -8,9 +8,14 @@ from .models import *
 
 # Create your views here.
 
+
+def inform(request):
+    return render(request, template_name='userprofile/index.html')
+
+
 def prof_list(request):
     profiles = UserProfile.objects.all()
-    return render(request, template_name='userprofile/index.html', context={'profiles': profiles})
+    return render(request, template_name='userprofile/index_profile.html', context={'profiles': profiles})
 
 
 def profile_detail(request, id_profile):
