@@ -5,13 +5,41 @@ Profiles
 {% endblock %}
 
 {% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-6 offset-md-2">
+            <table class="table table-bordered" >
 
-<p>
-    {{ teacher.surname }}
-    {{ teacher.name }}
-    {{ teacher.patronymic }}
+                <tbody>
+                <tr scope="row" >
+                    <td>Фамилия</td>
+                    <td>{{ teacher.surname }}</td>
+                </tr>
 
-</p>
+                <tr scope="row">
+                    <td>Имя</td>
+                    <td>{{ teacher.name }}</td>
+                </tr>
+
+                <tr scope="row">
+                    <td>Отчество</td>
+                    <td>{{ teacher.patronymic }}</td>
+                </tr>
+
+                <tr scope="row">
+                    <td>Дата рожления</td>
+                    <td>{{ teacher.date_of_birth|date:"d M Y" }}</td>
+                </tr>
+
+                <tr scope="row">
+                    <td>Номер телефона</td>
+                    <td>{{ teacher.ph_number }}</td>
+                </tr>
 
 
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 {% endblock %}

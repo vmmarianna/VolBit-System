@@ -21,5 +21,4 @@ class UserProfileForm(forms.ModelForm):
             'patronymic',
             'date_of_birth',
             'ph_number',
-            'group',
         )

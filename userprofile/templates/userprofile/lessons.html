@@ -1,24 +1,36 @@
-<h1>Lessons</h1>
-{% for lesson in lessons %}
-<p>{{ lesson.id_lesson }}</p>
-{% if lesson.pay is None %}
-<p>Оплата: Неизвестно</p>
-{% elif lesson.pay is False %}
-<p>Оплата: Не оплачено</p>
-{% elif lesson.pay is True %}
-<p>Оплата: Оплачено</p>
-{% endif %}
+{% extends 'userprofile/base_profile.html'%}
+{% load static %}
 
-<p>{{ lesson.date_start }}</p>
-<p>{{ lesson.date_end }}</p>
-<p>{{ lesson.name_place }}</p>
-{% for teacher in lesson.name_teacher.all %}
-<h3>Teachers</h3>
-<p>{{ teacher }}</p>
-{% endfor %}
-<p>{{ lesson.name_group }}</p>
-<h3>Students</h3>
-{% for student in lesson.students.all %}
-<p>{{ student }}</p>
-{% endfor %}
-{% endfor %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-6 offset-md-2">
+
+            {% for lesson in lessons %}
+            <h1>Lessons</h1>
+            <p>{{ lesson.id_lesson }}</p>
+            {% if lesson.pay is None %}
+            <p>Оплата: Неизвестно</p>
+            {% elif lesson.pay is False %}
+            <p>Оплата: Не оплачено</p>
+            {% elif lesson.pay is True %}
+            <p>Оплата: Оплачено</p>
+            {% endif %}
+
+            <p>{{ lesson.date_start }}</p>
+            <p>{{ lesson.date_end }}</p>
+            <p>{{ lesson.name_place }}</p>
+            {% for teacher in lesson.name_teacher.all %}
+            <h3>Teachers</h3>
+            <p>{{ teacher }}</p>
+            {% endfor %}
+            <p>{{ lesson.name_group }}</p>
+            <h3>Students</h3>
+            {% for student in lesson.students.all %}
+            <p>{{ student }}</p>
+            {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

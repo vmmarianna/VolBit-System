@@ -1,14 +1,22 @@
 {% extends 'userprofile/base_profile.html'%}
+{% load static %}
 
 {% block title %}
 {{ group.name_group }} - {{ block.super }}
 {% endblock %}
 
 {% block content %}
-<h1 class="mt-5">Студенты из группы: "{{ group.name_group }}"</h1>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-6 offset-md-2">
 
-{% for profile in group.profiles.all %}
-{% include 'userprofile/includes/profile_card_template.html' %}
-{% endfor %}
+            <h1 class="mt-5">Студенты из группы: "{{ group.name_group }}"</h1>
+
+            {% for profile in group.profiles.all %}
+            {% include 'userprofile/includes/profile_card_template.html' %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
 
 {% endblock %}

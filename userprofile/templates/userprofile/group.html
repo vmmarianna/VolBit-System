@@ -1,17 +1,23 @@
 {% extends 'userprofile/base_profile.html'%}
+{% load static %}
 
 {% block title %}
-Groups list - {{ block.super }}
+Groups list
 {% endblock %}
 
 {% block content %}
-<h1 class="mt-5">Группы:</h1>
-{% for group in groups %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-6 offset-md-2">
 
-<h2><a href="{{ group.get_absolute_url }}"> {{group.name_group}}</a></h2>
+        <h1 class="mt-5">Группы:</h1>
+        {% for group in groups %}
 
+        <h2><a href="{{ group.get_absolute_url }}"> {{group.name_group}}</a></h2>
 
-{% endfor %}
-
+        {% endfor %}
+        </div>
+    </div>
+</div>
 {% endblock %}
 

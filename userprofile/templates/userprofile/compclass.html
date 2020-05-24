@@ -1,32 +1,39 @@
 {% extends 'userprofile/base_profile.html'%}
-
+{% load static %}
 {% block title %}
 Groups list - {{ block.super }}
 {% endblock %}
 
 {% block content %}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-6 offset-md-2">
+
 <h1 class="mt-5">Курсы:</h1>
+    <table>
+        <tr>
+            <th>Группа</th>
+            <th>Стоимость 1 занятия</th>
+            <th>Продолжительность</th>
+            <th>Время начала занятия</th>
+            <th>Время окончания занятия</th>
+        </tr>
+        {% for each in compclass %}
+        {% for cmcl in each.name_comp.all %}
+        <tr>
+            <td><a href="{{ cmcl.get_absolute_url }}">{{ cmcl }}</a></td>
+            <td>{{ each.price|floatformat:2 }}</td>
+            <td>{{ each.long }}</td>
+            <td>{{ each.beg_hours }}</td>
+            <td>{{ each.end_hours }}</td>
+        </tr>
+        {% endfor %}
+        {% endfor %}
+    </table>
 
-<table>
-    <tr>
-        <th>Группа</th>
-        <th>Стоимость 1 занятия</th>
-        <th>Продолжительность</th>
-        <th>Время начала занятия</th>
-        <th>Время окончания занятия</th>
-    </tr>
-    {% for each in compclass %}
-    {% for cmcl in each.name_comp.all %}
-    <tr>
-        <td><a href="{{ cmcl.get_absolute_url }}">{{ cmcl }}</a></td>
-        <td>{{ each.price|floatformat:2 }}</td>
-        <td>{{ each.long }}</td>
-        <td>{{ each.beg_hours }}</td>
-        <td>{{ each.end_hours }}</td>
-    </tr>
-    {% endfor %}
-    {% endfor %}
-</table>
-
+        </div>
+    </div>
+</div>
 
 {% endblock %}
