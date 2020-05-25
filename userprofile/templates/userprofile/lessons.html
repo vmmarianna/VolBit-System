@@ -20,11 +20,13 @@
             <p>{{ lesson.date_start }}</p>
             <p>{{ lesson.date_end }}</p>
             <p>{{ lesson.name_place }}</p>
+
             {% for teacher in lesson.name_teacher.all %}
-            <h3>Teachers</h3>
-            <p>{{ teacher }}</p>
+                <h3>Teachers</h3>
+                <p>{{ teacher }}</p>
             {% endfor %}
             <p>{{ lesson.name_group }}</p>
+
             <h3>Students</h3>
             {% for student in lesson.students.all %}
             <p>{{ student }}</p>

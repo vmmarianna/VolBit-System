@@ -5,11 +5,9 @@ from .models import *
 
 
 # Register your models here.
-# admin.site.register(models.Login)
-
 
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('id_profile', 'surname', 'name', 'patronymic', 'date_of_birth', 'ph_number', 'user',)
+    list_display = ('id_profile', 'surname', 'name', 'patronymic', 'sex', 'date_of_birth', 'ph_number', 'user',)
 
 
 # Register the admin class with the associated model
@@ -41,7 +39,7 @@ admin.site.register(Place, PlaceAdmin)
 
 
 class TeacherProfileAdmin(admin.ModelAdmin):
-    list_display = ('id_teacher', 'surname', 'name', 'patronymic', 'date_of_birth', 'ph_number')
+    list_display = ('id_teacher', 'surname', 'name', 'patronymic', 'sex', 'date_of_birth', 'ph_number')
     # Register the admin class with the associated model
 
 
@@ -49,8 +47,15 @@ admin.site.register(TeacherProfile, TeacherProfileAdmin)
 
 
 class LessonsAdmin(admin.ModelAdmin):
-    list_display = ('id_lesson', 'pay', 'date_start ', 'date_end')
+    list_display = ('id_lesson', 'pay', 'date_start ', 'date_end', 'data_statement', 'pay_statement')
     # Register the admin class with the associated model
 
 
 admin.site.register(Lesson)
+
+
+class StatementAdmin(admin.ModelAdmin):
+    list_display = ('id_statement', 'pay_statement', 'data_statement')
+
+
+admin.site.register(Statement)
