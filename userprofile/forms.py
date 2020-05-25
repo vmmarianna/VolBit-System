@@ -22,3 +22,8 @@ class UserProfileForm(forms.ModelForm):
             'date_of_birth',
             'ph_number',
         )
+
+
+class LoginForm(forms.Form):
+    username = forms.CharField()
+    password = forms.CharField(widget=forms.PasswordInput)

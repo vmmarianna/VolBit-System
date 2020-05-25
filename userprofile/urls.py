@@ -1,9 +1,13 @@
 from django.urls import path
+from django.conf.urls import url
+from django.contrib.auth.views import auth_logout
+
+from . import views
 
 from .views import *
 
 urlpatterns = [
-    path('userprofile/<int:id_profile>/', profile_detail, name='profile_detail_url'),
+    path('userprofile/<int:user_id>/', profile_detail, name='profile_detail_url'),
     path('groups/', group_list, name='groups_list_url'),
     path('group/<int:id_group>/', group_detail, name='group_detail_url'),
     path('compclass/', compclass_list, name='compclass_list_url'),
@@ -12,6 +16,8 @@ urlpatterns = [
     path('teacherprofile/', teach_list, name='teachers_list_url'),
     path('teacher/<int:id_teacher>/', teach_detail, name='teacher_detail_url'),
     path('lessons/', lessons_list, name='lessons_detail_url'),
-    path('inform/', inform, name='info_url'),
-    path('', prof_list, name='profile_list_url'),
+    path('', inform, name='info_url'),
+    path('profile_list', prof_list, name='profile_list_url'),
+    path('login/', views.user_login, name='login'),
+    path('logout/', logout_user, name='logout'),
 ]

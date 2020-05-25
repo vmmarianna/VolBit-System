@@ -9,10 +9,26 @@ Profiles
         <div class="row">
             <div class="col-6 offset-md-2">
                 <h1 class="mb-3">Профили:</h1>
-                {% for profile in profiles %}
+                {% for user in users %}
                 {% include 'userprofile/includes/profile_card_template.html' %}
                 {% endfor %}
             </div>
          </div>
     </div>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if users.has_previous %}
+            <a href="?page={{ users.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ users.number }} of {{ users.paginator.num_pages }}.
+        </span>
+
+        {% if users.has_next %}
+            <a href="?page={{ users.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
 {% endblock %}

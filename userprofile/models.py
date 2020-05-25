@@ -10,11 +10,11 @@ class UserProfile(models.Model):
     surname = models.CharField(max_length=100)
     name = models.CharField(max_length=100)
     patronymic = models.CharField(max_length=50)
-    number_school = models.IntegerField()
+    number_school = models.IntegerField(null=True)
     date_of_birth = models.DateField(null=True)
     ph_number = models.CharField(max_length=12)
     # email = models.EmailField()
-    group = models.ManyToManyField('Group', blank=True, related_name='profiles')
+    group = models.ManyToManyField('Group', null=True, related_name='profiles')
 
     def get_absolute_url(self):
         return reverse('profile_detail_url', args=[str(self.id_profile)])
@@ -69,7 +69,7 @@ class CompClass(models.Model):
         return '%s' % self.name_comp
 
 
-class Places(models.Model):
+class Place(models.Model):
     id_place = models.AutoField(primary_key=True)
     name_place = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
@@ -83,12 +83,12 @@ class Places(models.Model):
         return '%s' % self.name_place
 
 
-class Lessons(models.Model):
+class Lesson(models.Model):
     id_lesson = models.AutoField(primary_key=True)
     pay = models.BooleanField(null=True)
     date_start = models.DateField(auto_now=False, auto_now_add=False, )
     date_end = models.DateField(null=True, auto_now=False, auto_now_add=False, )
-    name_place = models.OneToOneField('Places', blank=True, related_name='places', on_delete=models.CASCADE, )
+    name_place = models.OneToOneField('Place', blank=True, related_name='places', on_delete=models.CASCADE, )
     name_teacher = models.ManyToManyField('TeacherProfile', blank=True, related_name='teacherprofile')
     name_group = models.OneToOneField('Group', blank=True, related_name='group', on_delete=models.CASCADE, )
     students = models.ManyToManyField('UserProfile', blank=True, related_name='students', )

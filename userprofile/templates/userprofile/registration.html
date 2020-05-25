@@ -5,6 +5,8 @@ Profiles
 {% endblock %}
 
 {% block content %}
+    {{ user_form.errors }}
+    {{ profile_form.errors }}
 <div class="container mt-5">
     <div class="row">
         <div class="col-6 offset-md-2">
