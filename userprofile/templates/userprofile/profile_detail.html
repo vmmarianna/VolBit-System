@@ -9,39 +9,79 @@ Profiles
     <div class="row">
         <div class="col-6 offset-md-2">
             <table class="table table-bordered" >
-
                 <tbody>
+                {% if user_profile %}
+
+                <tr scope="row" >
+                    <td>Username</td>
+                    <td>{{ user_profile.username }}</td>
+                </tr>
+
                 <tr scope="row" >
                     <td>Фамилия</td>
-                    <td>{{ profile.surname }}</td>
+                    <td>{{ user_profile.userprofile.surname }}</td>
                 </tr>
 
                 <tr scope="row">
                     <td>Имя</td>
-                    <td>{{ profile.name }}</td>
+                    <td>{{ user_profile.userprofile.name }}</td>
                 </tr>
 
                 <tr scope="row">
                     <td>Отчество</td>
-                    <td>{{ profile.patronymic }}</td>
+                    <td>{{ user_profile.userprofile.patronymic }}</td>
                 </tr>
 
                 <tr scope="row">
                     <td>Номер школы</td>
-                    <td>{{ profile.number_school }}</td>
+                    <td>{{ user_profile.userprofile.number_school }}</td>
                 </tr>
 
                 <tr scope="row">
                     <td>Дата рожления</td>
-                    <td>{{ profile.date_of_birth|date:"d M Y" }}</td>
+                    <td>{{ user_profile.userprofile.date_of_birth|date:"d M Y" }}</td>
                 </tr>
 
                 <tr scope="row">
                     <td>Номер телефона</td>
-                    <td>{{ profile.ph_number }}</td>
+                    <td>{{ user_profile.userprofile.ph_number }}</td>
+                </tr>
+{% else %}
+                <tr scope="row" >
+                    <td>Username</td>
+                    <td>{{ user.username }}</td>
                 </tr>
 
+                <tr scope="row" >
+                    <td>Фамилия</td>
+                    <td>{{ user.userprofile.surname }}</td>
+                </tr>
 
+                <tr scope="row">
+                    <td>Имя</td>
+                    <td>{{ user.userprofile.name }}</td>
+                </tr>
+
+                <tr scope="row">
+                    <td>Отчество</td>
+                    <td>{{ user.userprofile.patronymic }}</td>
+                </tr>
+
+                <tr scope="row">
+                    <td>Номер школы</td>
+                    <td>{{ user.userprofile.number_school }}</td>
+                </tr>
+
+                <tr scope="row">
+                    <td>Дата рожления</td>
+                    <td>{{ user.userprofile.date_of_birth|date:"d M Y" }}</td>
+                </tr>
+
+                <tr scope="row">
+                    <td>Номер телефона</td>
+                    <td>{{ user.userprofile.ph_number }}</td>
+                </tr>
+                {% endif %}
                 </tbody>
             </table>
         </div>

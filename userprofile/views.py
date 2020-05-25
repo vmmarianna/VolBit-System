@@ -1,9 +1,14 @@
+from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.shortcuts import render
+from django.contrib.auth import logout
 
 from .forms import UserForm, UserProfileForm
 from .models import *
+from django.contrib.auth import authenticate, login
+from .forms import LoginForm
 
 
 # Create your views here.
@@ -13,14 +18,28 @@ def inform(request):
     return render(request, template_name='userprofile/index.html')
 
 
+#@login_required
 def prof_list(request):
-    profiles = UserProfile.objects.all()
-    return render(request, template_name='userprofile/index_profile.html', context={'profiles': profiles})
+    paginator = Paginator(User.objects.all(), 5)
+    page = request.GET.get('page')
+    try:
+        users = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        users = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        users = paginator.page(paginator.num_pages)
+
+    return render(request, template_name='userprofile/index_profile.html', context={'users': users})
 
 
-def profile_detail(request, id_profile):
-    profile = get_object_or_404(UserProfile, id_profile=id_profile)
-    return render(request, 'userprofile/profile_detail.html', {'profile': profile})
+def profile_detail(request, user_id):
+    if request.user.is_staff:
+        user = get_object_or_404(User, id=user_id)
+        return render(request, 'userprofile/profile_detail.html', {'user_profile': user})
+    else:
+        return render(request, 'userprofile/profile_detail.html')
 
 
 def group_list(request):
@@ -39,7 +58,7 @@ def compclass_list(request):
 
 
 def places_list(request):
-    places = Places.objects.all()
+    places = Place.objects.all()
     return render(request, template_name='userprofile/places.html', context={'places': places})
 
 
@@ -54,7 +73,7 @@ def teach_detail(request, id_teacher):
 
 
 def lessons_list(request):
-    lessons = Lessons.objects.all()
+    lessons = Lesson.objects.all()
     return render(request, template_name='userprofile/lessons.html', context={'lessons': lessons})
 
 
@@ -69,7 +88,9 @@ def registration(request):
         # Сохранение в модели и валидация
         user_form = UserForm(request.POST)
         profile_form = UserProfileForm(request.POST)
-
+        print(request.POST)
+        print(user_form.errors)
+        print(profile_form.errors)
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
             user.set_password(user.password)
@@ -79,4 +100,31 @@ def registration(request):
             profile_form.save()
             return redirect(reverse('profile_detail_url', args=[user.pk]))
         else:
-            return HttpResponse(status=505)
+            return render(request, template_name='userprofile/registration.html',
+                          context={'user_form': user_form, 'profile_form': profile_form})
+
+
+def user_login(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            user = authenticate(request=request, **form.cleaned_data)
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return redirect(reverse('profile_detail_url', args=[user.pk]))
+                else:
+                    return HttpResponse('Disabled account')
+            else:
+                return HttpResponse('Invalid login')
+    elif request.method == 'GET':
+        form = LoginForm()
+        return render(request, 'userprofile/login.html', {'form': form})
+
+    return HttpResponse(content='Error during login', status=404)
+
+
+def logout_user(request):
+    logout(request)
+    return redirect('info_url')
+

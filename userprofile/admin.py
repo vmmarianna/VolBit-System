@@ -32,12 +32,12 @@ class CompClassAdmin(admin.ModelAdmin):
 admin.site.register(CompClass, CompClassAdmin)
 
 
-class PlacesAdmin(admin.ModelAdmin):
+class PlaceAdmin(admin.ModelAdmin):
     list_display = ('id_place', 'name_place', 'address', 'floor', 'office')
     # Register the admin class with the associated model
 
 
-admin.site.register(Places, PlacesAdmin)
+admin.site.register(Place, PlaceAdmin)
 
 
 class TeacherProfileAdmin(admin.ModelAdmin):
@@ -53,4 +53,4 @@ class LessonsAdmin(admin.ModelAdmin):
     # Register the admin class with the associated model
 
 
-admin.site.register(Lessons)
+admin.site.register(Lesson)
