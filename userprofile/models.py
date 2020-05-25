@@ -9,6 +9,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     surname = models.CharField(max_length=100)
     name = models.CharField(max_length=100)
+    sex = models.CharField(max_length=10)
     patronymic = models.CharField(max_length=50)
     number_school = models.IntegerField(null=True)
     date_of_birth = models.DateField(null=True)
@@ -40,6 +41,7 @@ class TeacherProfile(models.Model):
     surname = models.CharField(max_length=100)
     name = models.CharField(max_length=100)
     patronymic = models.CharField(max_length=50)
+    sex = models.CharField(max_length=10)
     date_of_birth = models.DateField(null=True)
     ph_number = models.CharField(max_length=12)
 
@@ -93,10 +95,22 @@ class Lesson(models.Model):
     name_group = models.OneToOneField('Group', blank=True, related_name='group', on_delete=models.CASCADE, )
     students = models.ManyToManyField('UserProfile', blank=True, related_name='students', )
 
-    # ФИО студента
-
     def get_absolute_url(self):
         return reverse('lessons_detail_url', args=[str(self.id_lesson)])
 
     def __str__(self):
         return '%s - %s - %s' % (self.name_group, self.name_place, self.date_start)
+
+
+class Statement(models.Model):
+    id_statement = models.AutoField(primary_key=True)
+    pay_statement = models.FloatField(null=True)
+    data_statement = models.DateField(null=True, auto_now=False, auto_now_add=False, )
+    name_group = models.OneToOneField('Group', blank=True, related_name='group_statements', on_delete=models.CASCADE, )
+    students = models.ManyToManyField('UserProfile', blank=True, related_name='students_statements', )
+
+    def get_absolute_url(self):
+        return reverse('statement_detail_url', args=[str(self.id_statement)])
+
+    def __str__(self):
+        return '%s - %s - %s' % (self.name_group, self.data_statement, self.students)

@@ -77,6 +77,11 @@ def lessons_list(request):
     return render(request, template_name='userprofile/lessons.html', context={'lessons': lessons})
 
 
+def statement_pay(request):
+    statements = Statement.objects.all()
+    return render(request, template_name='userprofile/statement_pay.html', context={'statements': statements})
+
+
 def registration(request):
     if request.method == 'GET':
         user_form = UserForm()

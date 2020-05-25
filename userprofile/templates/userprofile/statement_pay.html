@@ -1,0 +1,44 @@
+{% extends 'userprofile/base_profile.html'%}
+{% load static %}
+
+{% block title %}
+Groups list
+{% endblock %}
+
+{% block content %}
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">ФИО</th>
+          <th scope="col">Дата оплаты</th>
+          <th scope="col">Сумма оплаты</th>
+        </tr>
+      </thead>
+
+
+    <tbody>
+        <tr>
+         {% for statement in statements %}
+
+            <th scope="row">
+                {% for student in statement.students.all %}
+                     <p>{{ student }}</p>
+                {% endfor %}
+            </th>
+
+
+            <th scope="row">
+                {{ statement.data_statement}}
+            </th>
+
+             <th scope="row">
+                {{ statement.pay_statement}}
+            </th>
+         {% endfor %}
+        </tr>
+    </tbody>
+
+</table>
+
+{% endblock %}
+

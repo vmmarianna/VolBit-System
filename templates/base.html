@@ -47,9 +47,13 @@
              <li class="nav-item active">
                 <a class="nav-link" href="{% url 'lessons_detail_url' %}">Расписание</a>
             </li>
+             <li class="nav-item">
+                <a class="nav-link " data-value="contact" href="{% url 'statement_detail_url' %}">Ведомость оплаты</a>
+              </li>
             <li class="nav-item">
-	        <a class="nav-link " data-value="contact" href="{% url 'user_registration' %}">Регистрация</a>
-	      </li>
+	            <a class="nav-link " data-value="contact" href="{% url 'user_registration' %}">Регистрация</a>
+	        </li>
+
         {% if not user.is_authenticated %}
             <li class="nav-item">
 	        <a class="nav-link " data-value="contact" href="{% url 'login' %}">Вход в систему</a>
