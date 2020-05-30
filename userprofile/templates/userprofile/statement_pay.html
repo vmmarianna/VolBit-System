@@ -15,10 +15,10 @@ Groups list
         </tr>
       </thead>
 
-
+{% for statement in statements %}
     <tbody>
         <tr>
-         {% for statement in statements %}
+
 
             <th scope="row">
                 {% for student in statement.students.all %}
@@ -37,8 +37,8 @@ Groups list
          {% endfor %}
         </tr>
     </tbody>
-
+{% endblock %}
 </table>
 
-{% endblock %}
+
 

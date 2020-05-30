@@ -1,5 +1,8 @@
+import django
 from django.contrib.auth.decorators import login_required
+from django.contrib.postgres.search import SearchVector
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.shortcuts import render
@@ -10,15 +13,32 @@ from .models import *
 from django.contrib.auth import authenticate, login
 from .forms import LoginForm
 
-
 # Create your views here.
-
+"""
+https://djbook.ru/ch12s04.html
+"""
 
 def inform(request):
     return render(request, template_name='userprofile/index.html')
 
 
-#@login_required
+def search(request, search_query=None):
+    search_query = search_query or request.GET.get('search')
+    search_models = [User, Lesson, Group, CompClass]  # Add your models here, in any way you find best.
+    search_results = {}
+    for model in search_models:
+        fields = [x for x in model._meta.fields if isinstance(x, django.db.models.CharField)]
+        search_queries = [Q(**{x.name + "__contains": search_query}) for x in fields]
+        q_object = Q()
+        for query in search_queries:
+            q_object = q_object | query
+
+        results = model.objects.filter(q_object)
+        search_results.update({model._meta.model_name + '_result': results})
+    return render(request, template_name='userprofile/search_results.html', context=search_results)
+
+
+@login_required
 def prof_list(request):
     paginator = Paginator(User.objects.all(), 5)
     page = request.GET.get('page')
@@ -34,8 +54,20 @@ def prof_list(request):
     return render(request, template_name='userprofile/index_profile.html', context={'users': users})
 
 
+# def prof_list(request):
+#
+#     search_query = request.GET.get('search', '')
+#
+#     if search_query:
+#         users = UserProfile.objects.filter(name__icontains = search_query)
+#     else:
+#         users = User.objects.all()
+#
+#     return render(request, template_name='userprofile/index_profile.html', context={'users': users})
+
+
 def profile_detail(request, user_id):
-    if request.user.is_staff:
+    if request.user.has_perm('userprofile.view_userprofile'):
         user = get_object_or_404(User, id=user_id)
         return render(request, 'userprofile/profile_detail.html', {'user_profile': user})
     else:
@@ -93,9 +125,6 @@ def registration(request):
         # Сохранение в модели и валидация
         user_form = UserForm(request.POST)
         profile_form = UserProfileForm(request.POST)
-        print(request.POST)
-        print(user_form.errors)
-        print(profile_form.errors)
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
             user.set_password(user.password)
@@ -132,4 +161,3 @@ def user_login(request):
 def logout_user(request):
     logout(request)
     return redirect('info_url')
-

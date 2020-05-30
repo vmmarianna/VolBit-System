@@ -18,7 +18,7 @@ class UserProfile(models.Model):
     group = models.ManyToManyField('Group', null=True, related_name='profiles')
 
     def get_absolute_url(self):
-        return reverse('profile_detail_url', args=[str(self.id_profile)])
+        return reverse('profile_detail_url', args=[str(self.user.pk)])
 
     def __str__(self):
         return '%s, %s, %s' % (self.surname, self.name, self.patronymic)
@@ -90,9 +90,9 @@ class Lesson(models.Model):
     pay = models.BooleanField(null=True)
     date_start = models.DateField(auto_now=False, auto_now_add=False, )
     date_end = models.DateField(null=True, auto_now=False, auto_now_add=False, )
-    name_place = models.OneToOneField('Place', blank=True, related_name='places', on_delete=models.CASCADE, )
+    name_place = models.ManyToManyField('Place', blank=True, related_name='places')
     name_teacher = models.ManyToManyField('TeacherProfile', blank=True, related_name='teacherprofile')
-    name_group = models.OneToOneField('Group', blank=True, related_name='group', on_delete=models.CASCADE, )
+    name_group = models.ManyToManyField('Group', blank=True, related_name='group', )
     students = models.ManyToManyField('UserProfile', blank=True, related_name='students', )
 
     def get_absolute_url(self):
