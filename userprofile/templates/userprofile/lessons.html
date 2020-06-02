@@ -2,21 +2,65 @@
 {% load static %}
 
 {% block content %}
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-6 offset-md-2">
 
-            <table class="table">
-              <thead>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ФИО</th>
+      {% for lesson in lessons %}
+      <th scope="col">{{ lesson.date_start }}</th>
+        {% endfor %}
+    </tr>
+
+  </thead>
+
+
+  <tbody>
+  {% for infos in table_info %}
+{% for key, values in infos.items %}
+
+            {% if key == 'profile' %}
                 <tr>
-                  <th scope="col">ФИО</th>
-                  <th scope="col"> {% for lesson in lessons %}
-                  <th scope="col"> <p>{{ lesson.date_start }}</p></th>
-                    {% endfor %}
-                    </th>
+            <td>{{ values }}</td>
+            {% else %}
+                {% for v in values %}
+            <td>{{ v }}</td>
+                {% endfor %}
                 </tr>
+            {% endif %}
 
-                {% for lesson in lessons %}
+
+
+            {% endfor %}
+            {% endfor %}
+
+
+
+  </tbody>
+</table>
+
+{% endblock %}
+
+
+
+
+
+{#<div class="container mt-5">#}
+{#    <div class="row">#}
+{#        <div class="col-6 offset-md-2">#}
+{##}
+{#            <table class="table">#}
+{#              <thead>#}
+{#                <tr>#}
+{#                  <th scope="col">ФИО</th>#}
+{#                  <th scope="col"> {% for lesson in lessons %}#}
+{#                  <th scope="col"> <p>{{ lesson.date_start }}</p></th>#}
+{#                    {% endfor %}#}
+{#                    </th>#}
+{#                </tr>#}
+{##}
+{#                {% for lesson in lessons %}#}
 {##}
 {#            <h1>Lessons</h1>#}
 {#            <p>{{ lesson.id_lesson }}</p>#}
@@ -37,40 +81,52 @@
 {#                <p>{{ teacher }}</p>#}
 {#            {% endfor %}#}
 {#            <p>{{ lesson.name_group }}</p>#}
-    <tbody>
-    <tr>
+{#    <tbody>#}
+{#    <tr>#}
+{##}
+{#        </tr>#}
+{#                    #}
+{#                    -----|----|#}
+{#                    |---|----|--#}
+{#                    |          #}
+{#                    |        |#}
+{#                    ---------#}
+{##}
+{#     <tr>#}
+{##}
+{#            <th scope="row">#}
+{#                {% for student in lesson.students.all %}#}
+{#                <p>{{ student }}</p>#}
+{#                {% endfor %}#}
+{#            </th>#}
+{#            <th scope="row">#}
+{#                {% if lesson.pay is None %}#}
+{#                <p>Оплата: Неизвестно</p>#}
+{#                {% elif lesson.pay is False %}#}
+{#                <p>Не присутствовал</p>#}
+{#                {% elif lesson.pay is True %}#}
+{#                <p>Присутствовал</p>#}
+{#                {% endif %}#}
+{#            </th>#}
+{##}
+{##}
+{##}
+{#     </tr>#}
+{##}
+{##}
+{##}
+{#{% endfor %}#}
+{##}
+{#    </tbody>#}
+{##}
+{##}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
 
-        </tr>
-
-     <tr>
-
-            <th scope="row">
-                {% for student in lesson.students.all %}
-                <p>{{ student }}</p>
-                {% endfor %}
-            </th>
-            <th scope="row">
-                {% if lesson.pay is None %}
-                <p>Оплата: Неизвестно</p>
-                {% elif lesson.pay is False %}
-                <p>Не присутствовал</p>
-                {% elif lesson.pay is True %}
-                <p>Присутствовал</p>
-                {% endif %}
-            </th>
+{#    {% for st in lesson.students.all %}#}
+{#            <p>{{ st.surname }} {{ st.name }} {{ lesson.date_start }}</p>#}
+{#    {% endfor %}#}
 
 
-
-     </tr>
-
-
-
-{% endfor %}
-
-    </tbody>
-
-
-        </div>
-    </div>
-</div>
-{% endblock %}
+{#https://stackoverflow.com/questions/20971216/how-do-i-display-related-many-to-many-fields-as-a-table-in-django-template#}

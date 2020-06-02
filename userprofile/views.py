@@ -1,3 +1,5 @@
+from itertools import chain, repeat
+
 import django
 from django.contrib.auth.decorators import login_required
 from django.contrib.postgres.search import SearchVector
@@ -18,13 +20,14 @@ from .forms import LoginForm
 https://djbook.ru/ch12s04.html
 """
 
+
 def inform(request):
     return render(request, template_name='userprofile/index.html')
 
 
 def search(request, search_query=None):
     search_query = search_query or request.GET.get('search')
-    search_models = [User, Lesson, Group, CompClass]  # Add your models here, in any way you find best.
+    search_models = [User, UserProfile, Lesson, Group, CompClass]  # Add your models here, in any way you find best.
     search_results = {}
     for model in search_models:
         fields = [x for x in model._meta.fields if isinstance(x, django.db.models.CharField)]
@@ -52,18 +55,6 @@ def prof_list(request):
         users = paginator.page(paginator.num_pages)
 
     return render(request, template_name='userprofile/index_profile.html', context={'users': users})
-
-
-# def prof_list(request):
-#
-#     search_query = request.GET.get('search', '')
-#
-#     if search_query:
-#         users = UserProfile.objects.filter(name__icontains = search_query)
-#     else:
-#         users = User.objects.all()
-#
-#     return render(request, template_name='userprofile/index_profile.html', context={'users': users})
 
 
 def profile_detail(request, user_id):
@@ -106,7 +97,20 @@ def teach_detail(request, id_teacher):
 
 def lessons_list(request):
     lessons = Lesson.objects.all()
-    return render(request, template_name='userprofile/lessons.html', context={'lessons': lessons})
+    table_info = []
+    all_group_user = lessons.last().group.profiles.all()
+    for user in all_group_user:
+        user_attention = []
+        for lesson in lessons:
+            if user in lesson.students.all():
+                user_attention.append(True)
+            else:
+                user_attention.append(False)
+
+    return render(request,
+                  template_name='userprofile/lessons.html',
+                  context={'lessons': lessons, 'table_info': table_info}
+                  )
 
 
 def statement_pay(request):

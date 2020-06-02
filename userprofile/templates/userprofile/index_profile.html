@@ -9,8 +9,8 @@ Profiles
         <div class="row">
             <div class="col-6 offset-md-2">
                 <h1 class="mb-3">Профили:</h1>
-                {% for user in users %}
-                {% include 'userprofile/includes/profile_card_template.html' %}
+                {% for person in users %}
+                {% include 'userprofile/includes/profile_card_template.html' with profile=person.userprofile %}
                 {% endfor %}
             </div>
          </div>

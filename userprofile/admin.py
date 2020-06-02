@@ -47,11 +47,11 @@ admin.site.register(TeacherProfile, TeacherProfileAdmin)
 
 
 class LessonsAdmin(admin.ModelAdmin):
-    list_display = ('id_lesson', 'pay', 'date_start ', 'date_end', 'data_statement', 'pay_statement')
+    list_display = ('id_lesson', 'pay',)
     # Register the admin class with the associated model
 
 
-admin.site.register(Lesson)
+admin.site.register(Lesson, LessonsAdmin)
 
 
 class StatementAdmin(admin.ModelAdmin):

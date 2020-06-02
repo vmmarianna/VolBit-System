@@ -2,6 +2,10 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.shortcuts import reverse
 
+"""
+https://docs.djangoproject.com/en/3.0/topics/db/examples/many_to_one/
+"""
+
 
 class UserProfile(models.Model):
     """Класс-модель для профилей студентов"""
@@ -9,12 +13,20 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     surname = models.CharField(max_length=100)
     name = models.CharField(max_length=100)
-    sex = models.CharField(max_length=10)
     patronymic = models.CharField(max_length=50)
     number_school = models.IntegerField(null=True)
     date_of_birth = models.DateField(null=True)
     ph_number = models.CharField(max_length=12)
-    # email = models.EmailField()
+    SEX_CHOICES = (
+        ('М', 'Мужской',),
+        ('Ж', 'Женский',),
+        ('Н', 'Не указан',),
+    )
+    sex = models.CharField(
+        max_length=1,
+        choices=SEX_CHOICES,
+        default=SEX_CHOICES[2]
+    )
     group = models.ManyToManyField('Group', null=True, related_name='profiles')
 
     def get_absolute_url(self):
@@ -22,17 +34,6 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return '%s, %s, %s' % (self.surname, self.name, self.patronymic)
-
-
-class Group(models.Model):
-    id_group = models.AutoField(primary_key=True)
-    name_group = models.CharField(max_length=100)
-
-    def get_absolute_url(self):
-        return reverse('group_detail_url', args=[str(self.id_group)])
-
-    def __str__(self):
-        return '%s' % self.name_group
 
 
 class TeacherProfile(models.Model):
@@ -53,6 +54,7 @@ class TeacherProfile(models.Model):
 
 
 class CompClass(models.Model):
+    """Класс-модель для компьютерного класса"""
     id_comp = models.AutoField(primary_key=True)
     name_comp = models.ManyToManyField('Group', blank=True, related_name='compclass')
     # Цена не должна быть целой
@@ -72,6 +74,7 @@ class CompClass(models.Model):
 
 
 class Place(models.Model):
+    """Класс-модель для места проведения занятия"""
     id_place = models.AutoField(primary_key=True)
     name_place = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
@@ -85,24 +88,39 @@ class Place(models.Model):
         return '%s' % self.name_place
 
 
+class Group(models.Model):
+    """Класс-модель для названий групп"""
+    id_group = models.AutoField(primary_key=True)
+    name_group = models.CharField(max_length=100)
+
+    def get_absolute_url(self):
+        return reverse('group_detail_url', args=[str(self.id_group)])
+
+    def __str__(self):
+        return '%s' % self.name_group
+
+
 class Lesson(models.Model):
+    """Класс-модель для ведомости посещения"""
     id_lesson = models.AutoField(primary_key=True)
     pay = models.BooleanField(null=True)
     date_start = models.DateField(auto_now=False, auto_now_add=False, )
     date_end = models.DateField(null=True, auto_now=False, auto_now_add=False, )
     name_place = models.ManyToManyField('Place', blank=True, related_name='places')
     name_teacher = models.ManyToManyField('TeacherProfile', blank=True, related_name='teacherprofile')
-    name_group = models.ManyToManyField('Group', blank=True, related_name='group', )
     students = models.ManyToManyField('UserProfile', blank=True, related_name='students', )
+    group = models.ForeignKey(Group, null=True, blank=True, on_delete=models.CASCADE, default=None)
 
     def get_absolute_url(self):
         return reverse('lessons_detail_url', args=[str(self.id_lesson)])
 
     def __str__(self):
-        return '%s - %s - %s' % (self.name_group, self.name_place, self.date_start)
+        return '%s - %s' % (self.name_place, self.date_start)
 
 
 class Statement(models.Model):
+    """Класс-модель для ведомости оплаты"""
+
     id_statement = models.AutoField(primary_key=True)
     pay_statement = models.FloatField(null=True)
     data_statement = models.DateField(null=True, auto_now=False, auto_now_add=False, )
